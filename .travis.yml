@@ -6,14 +6,15 @@ services:
   - docker
 
 # Build
-- docker build -t udagram-api-user ./udagram-api-user
-
+script:
+  - docker build -t udagram-api-user .
 # Tagging
-- docker tag udagram-api-user sudkul/udagram-api-user:v1
+  - docker tag udagram-api-user tatthang0501/udagram-api-user:v1
 # Do similar for other three images
 
 # Push
 # Assuming DOCKER_PASSWORD and DOCKER_USERNAME are set in the Travis repository settings
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-- docker push sudkul/udagram-api-user:v1
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push tatthang0501/udagram-api-user:v1
 # Do similar for other three images
